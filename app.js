@@ -6,52 +6,99 @@ const cardsFound = []; //Array of matches
 // an array of objects for all memory cards
 const cardArray = [
     {
-        name: 'fries',
-        img: 'img/fries.png'
+        name: '1',
+        img: 'img/1_1.png'
     },
     {
-        name: 'cheeseburger',
-        img: 'img/cheeseburger.png'
+        name: '2',
+        img: 'img/1_2.png'
     },
     {
-        name: 'hotdog',
-        img: 'img/hotdog.png'
+        name: '3',
+        img: 'img/1_3.png'
     },
     {
-        name: 'ice-cream',
-        img: 'img/ice-cream.png'
+        name: '4',
+        img: 'img/1_4.png'
     },
     {
-        name: 'milkshake',
-        img: 'img/milkshake.png'
+        name: '5',
+        img: 'img/2_1.png'
     },
     {
-        name: 'pizza',
-        img: 'img/pizza.png'
+        name: '6',
+        img: 'img/2_2.png'
     },
     {
-        name: 'fries',
-        img: 'img/fries.png'
+        name: '7',
+        img: 'img/2_3.png'
     },
     {
-        name: 'cheeseburger',
-        img: 'img/cheeseburger.png'
+        name: '8',
+        img: 'img/2_4.png'
     },
     {
-        name: 'hotdog',
-        img: 'img/hotdog.png'
+        name: '9',
+        img: 'img/3_1.png'
     },
     {
-        name: 'ice-cream',
-        img: 'img/ice-cream.png'
+        name: '10',
+        img: 'img/3_2.png'
     },
     {
-        name: 'milkshake',
-        img: 'img/milkshake.png'
+        name: '11',
+        img: 'img/3_3.png'
     },
     {
-        name: 'pizza',
-        img: 'img/pizza.png'
+        name: '12',
+        img: 'img/3_4.png'
+    },
+    {   name: '1',
+        img: 'img/1_1.png'
+    },
+    {
+        name: '2',
+        img: 'img/1_2.png'
+    },
+    {
+        name: '3',
+        img: 'img/1_3.png'
+    },
+    {
+        name: '4',
+        img: 'img/1_4.png'
+    },
+    {
+        name: '5',
+        img: 'img/2_1.png'
+    },
+    {
+        name: '6',
+        img: 'img/2_2.png'
+    },
+    {
+        name: '7',
+        img: 'img/2_3.png'
+    },
+    {
+        name: '8',
+        img: 'img/2_4.png'
+    },
+    {
+        name: '9',
+        img: 'img/3_1.png'
+    },
+    {
+        name: '10',
+        img: 'img/3_2.png'
+    },
+    {
+        name: '11',
+        img: 'img/3_3.png'
+    },
+    {
+        name: '12',
+        img: 'img/3_4.png'
     }
 ]
 
@@ -121,7 +168,6 @@ function checkMatch() {
 -pushing the corresponding objects name in the array to an empty array,
 -changing the img of the card with the id,
 -checking after 500ms whether the objects are corresponding.
-
 */
 function flipCard() {
    const cardId = this.getAttribute('data-id'); //getting the data-id attribute of the IMG
