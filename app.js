@@ -11,96 +11,96 @@ const cardArray = [
         name: '1',
         img: 'img/1_1.png',
         imgFront: 'img/1_1f.png',
-        order: 1;
+        order: 1
     },
     {
         name: '2',
         img: 'img/1_2.png',
         imgFront: 'img/1_2f.png',
-        order: 2;
+        order: 2
     },
     {
         name: '3',
         img: 'img/1_3.png',
         imgFront: 'img/1_3f.png',
-        order: 3;
+        order: 3
     },
     {
         name: '4',
         img: 'img/1_4.png',
         imgFront: 'img/1_4f.png',
-        order: 4;
+        order: 4
     },
     {
         name: '5',
         img: 'img/2_1.png',
         imgFront: 'img/2_1f.png',
-        order: 5;
+        order: 5
     },
     {
         name: '6',
         img: 'img/2_2.png',
         imgFront: 'img/2_2f.png',
-        order: 6;
+        order: 6
     },
     {
         name: '7',
         img: 'img/2_3.png',
         imgFront: 'img/2_3f.png',
-        order: 7;
+        order: 7
     },
     {
         name: '8',
         img: 'img/2_4.png',
         imgFront: 'img/2_4f.png',
-        order: 8;
+        order: 8
     },
     {   name: '1',
         img: 'img/1_1.png',
-        imgFront: 'img/4_1f.png',
-        order: 9;
+        imgFront: 'img/3_1f.png',
+        order: 9
     },
     {
         name: '2',
         img: 'img/1_2.png',
-        imgFront: 'img/4_2f.png',
-        order: 10;
+        imgFront: 'img/3_2f.png',
+        order: 10
     },
     {
         name: '3',
         img: 'img/1_3.png',
-        imgFront: 'img/4_3f.png',
-        order: 11;
+        imgFront: 'img/3_3f.png',
+        order: 11
     },
     {
         name: '4',
         img: 'img/1_4.png',
-        imgFront: 'img/4_4f.png',
-        order: 12;
+        imgFront: 'img/3_4f.png',
+        order: 12
     },
     {
         name: '5',
         img: 'img/2_1.png',
-        imgFront: 'img/5_1f.png',
-        order: 13;
+        imgFront: 'img/4_1f.png',
+        order: 13
     },
     {
         name: '6',
         img: 'img/2_2.png',
-        imgFront: 'img/5_2f.png',
-        order: 14;
+        imgFront: 'img/4_2f.png',
+        order: 14
     },
     {
         name: '7',
         img: 'img/2_3.png',
-        imgFront: 'img/5_3f.png',
-        order: 15;
+        imgFront: 'img/4_3f.png',
+        order: 15
     },
     {
         name: '8',
         img: 'img/2_4.png',
-        imgFront: 'img/5_4f.png',
-        order: 16;
+        imgFront: 'img/4_4f.png',
+        order: 16
     }
 ]
 
@@ -116,7 +116,8 @@ function createBoard () {
         const card = document.createElement('img'); //create html img
         card.setAttribute('src', cardArray[i].imgFront); //create front imgs
         card.setAttribute('data-id', i);
-        card.createAttribute('order');
+        //card.setAttribute('order', cardArray[i].order); ERST SPÄTER
+		card.setAttribute('style', `order: ${i+1};`);
         //console.log(card, i);
         card.addEventListener('click', flipCard) //adding an event listener, not calling the function
         gridDisplay.appendChild(card);//append img to grid
@@ -135,26 +136,30 @@ function checkMatch() {
 
     //if same card
     if (optionOneId === optionTwoId) {
-        cards[optionOneId].setAttribute('src', 'img/blank.png'); //TODO
-        cards[optionTwoId].setAttribute('src', 'img/blank.png'); //TODO
+        cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
+        cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
         alert('clicked same img');
     }
 
     if (cardsChosen[0] === cardsChosen[1] && optionOneId != optionTwoId) {
-        cards[optionOneId].setAttribute('src', 'img/white.png'); // //TODO show that a match is found by making the img white
-        cards[optionTwoId].setAttribute('src', 'img/white.png'); //TODO
+        cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); // //flip back to front img
+        cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //flip back to front img
         cards[optionOneId].removeEventListener('click', flipCard);
         cards[optionTwoId].removeEventListener('click', flipCard);
         /*cards[optionOneId].setAttribute('style', 'order: -1');
         switch statement - if "name", then order "x". 
         //have one round of tiles around for a border.
         */
+		//move imgs to correct order
+		cards[optionOneId].setAttribute('style', `order: ${cardArray[optionOneId].order};`);
+		cards[optionTwoId].setAttribute('style', `order: ${cardArray[optionTwoId].order};`);
+		//TODO: make visible that cards are used. Maybe smarter to do it via id CSS
         cardsFound.push(cardsChosen);
         alert('match found'); 
     }
     else { // if not the same card nor a match
-        cards[optionOneId].setAttribute('src', 'img/blank.png'); //TODO
-        cards[optionTwoId].setAttribute('src', 'img/blank.png'); //TODO
+        cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
+        cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
         alert('nope');
     }
     resultDisplay.textContent = cardsFound.length;
