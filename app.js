@@ -6,6 +6,11 @@ let cardsFront = []; //Array of the cards' front img
 let cardsOrder = []; //Array of the cards' flex order
 const cardsFound = []; //Array of matches
 // an array of objects for all memory cards
+
+let testVar = false;
+let memory = document.querySelector('#memory');
+
+
 const cardArray = [
     {
         name: '1',
@@ -106,7 +111,16 @@ const cardArray = [
 
 //creating the randomisation of array items
 
-cardArray.sort(() => 0.5 - Math.random());
+//cardArray.sort(() => 0.5 - Math.random());
+
+function fisherYatesShuffle(arr){
+    for(var i =arr.length-1 ; i>0 ;i--){
+        var j = Math.floor( Math.random() * (i + 1) ); //random index
+        [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
+    }
+}
+
+fisherYatesShuffle(cardArray);
 
 //console.log(cardArray);
 
@@ -124,7 +138,7 @@ function createBoard () {
     }   
 }
 
-createBoard();
+
 
 //checking whether items match
 function checkMatch() {
@@ -138,7 +152,7 @@ function checkMatch() {
     if (optionOneId === optionTwoId) {
         cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
         cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
-        alert('clicked same img');
+        //alert('clicked same img');
     }
 
     if (cardsChosen[0] === cardsChosen[1] && optionOneId != optionTwoId) {
@@ -153,16 +167,18 @@ function checkMatch() {
 		//move imgs to correct order
 		cards[optionOneId].setAttribute('style', `order: ${cardArray[optionOneId].order};`);
 		cards[optionTwoId].setAttribute('style', `order: ${cardArray[optionTwoId].order};`);
+        cards[optionOneId].classList.add('found');
+		cards[optionTwoId].classList.add('found');
 		//TODO: make visible that cards are used. Maybe smarter to do it via id CSS
         cardsFound.push(cardsChosen);
-        alert('match found'); 
+        //alert('match found'); 
     }
     else { // if not the same card nor a match
         cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
         cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
-        alert('nope');
+        //alert('nope');
     }
-    resultDisplay.textContent = cardsFound.length;
+    //resultDisplay.textContent = cardsFound.length;
     cardsChosen = []; //reset the array
     cardsChosenIds = [];
 
@@ -190,3 +206,38 @@ function flipCard() {
         setTimeout(checkMatch, 500); //wait 500ms before executing the function
     }
 }
+
+//animating the grid
+function fadeIn(){
+  gridDisplay.classList.add('show');
+  gridDisplay.classList.remove('hide');  
+}
+
+  new TypeWriter(`#typewriter`, {
+    loop: false,
+    cursor: {
+      speed: 600,
+      size: '2rem',
+      id: 'Some_TypeWriter_CSS',
+      enabled: false
+    },
+    timeout: 50
+  })
+  .write(`Alles Gute zum Geburtstag!`)
+  .wait(2000)
+  .removeAll()
+  .wait(500)
+  .write(`...ob das wohl mit dem Gedächtnis noch klappt?`)
+  .wait(2000)
+  .removeAll()
+  .wait(500)
+  .write(`...finden wir es heraus!`)
+  .wait(2000)
+  .removeAll()
+  .wait(500)
+  .write(`...mit einer Runde Memory!`)
+  .start()
+
+  //setTimeout(createBoard, 25000);
+  createBoard();
+  setTimeout(fadeIn, 22000);
