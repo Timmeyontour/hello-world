@@ -1,5 +1,6 @@
 const gridDisplay = document.querySelector('#grid');
 const resultDisplay = document.querySelector('#result');
+const headerDisplay = document.querySelector('#typewriter');
 let cardsChosen = []; //Array of the name properties of cards 
 let cardsChosenIds = []; //Array of the id properties of img 
 let cardsFront = []; //Array of the cards' front img
@@ -134,6 +135,7 @@ function createBoard () {
 		card.setAttribute('style', `order: ${i+1};`);
         //console.log(card, i);
         card.addEventListener('click', flipCard) //adding an event listener, not calling the function
+        card.classList.add('grid-item');
         gridDisplay.appendChild(card);//append img to grid
     }   
 }
@@ -183,7 +185,14 @@ function checkMatch() {
     cardsChosenIds = [];
 
     if(cardsFound.length === cardArray.length / 2) {
-        resultDisplay.textContent = 'Congratulations';
+        //resultDisplay.textContent = 'Congratulations';
+        for(let i = 0; i < cards.length; i++){
+        const card = cards[i];
+        card.classList.remove('grid-item');
+        card.classList.add('grid-done');
+        gridDisplay.classList.add('grid-end');
+        headerDisplay.classList.add('hide-header');
+        }
     }
 }
 
@@ -240,4 +249,5 @@ function fadeIn(){
 
   //setTimeout(createBoard, 25000);
   createBoard();
-  setTimeout(fadeIn, 22000);
+  setTimeout(fadeIn, 2000); //22000
+  

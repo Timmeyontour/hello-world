@@ -49,6 +49,11 @@ h1 {
     line-height: 200px; /*display h1 more centered*/
 }
 
+.hide-header {
+    opacity: 0;
+    transition: opacity 4000ms;
+}
+
 h3 {
     font-size: 3rem;
     letter-spacing: .1rem;
@@ -69,12 +74,19 @@ span {
 /*--------------------Tutorial styles*/
 
 #grid {
-    width: 400px;
-    height: 400px;
+    width: 475px;
+    height: 475px;
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 2rem;
     padding-top: 0;
+}
+
+.grid-end {
+    padding-left: 1rem;
+    transition: padding-left 4000ms;
+    transform: scale(1.5);
+    transition: transform 4000ms;
 }
 
 img {
@@ -85,4 +97,18 @@ img {
 .found {
     cursor:default;
     filter:grayscale(0);
+}
+
+.grid-item {
+    border: 1px solid darkslategray;
+    margin: .5em;
+    transition: border 4000ms;
+    transition: margin 4000ms;
+}
+
+.grid-done {
+    border: none;
+    margin: 0em;
+    transition: border 4000ms;
+    transition: margin 4000ms;
 }
