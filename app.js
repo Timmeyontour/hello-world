@@ -10,9 +10,14 @@ const cardsFound = []; //Array of matches
 
 let testVar = false;
 let memory = document.querySelector('#memory');
+let counter = 0;
 
+let bkSound = document.querySelector('#backgroundsound');
+let correctSound = document.querySelector('#correct');
+let wrongSound = document.querySelector('#wrong');
 
 const cardArray = [
+    //get img front 2
     {
         name: '1',
         img: 'img/1_1.png',
@@ -64,48 +69,56 @@ const cardArray = [
     {   name: '1',
         img: 'img/1_1.png',
         imgFront: 'img/3_1f.png',
+        imgEnd: 'img/3_1f.png',
         order: 9
     },
     {
         name: '2',
         img: 'img/1_2.png',
         imgFront: 'img/3_2f.png',
+        imgEnd: 'img/3_1f.png',
         order: 10
     },
     {
         name: '3',
         img: 'img/1_3.png',
         imgFront: 'img/3_3f.png',
+        imgEnd: 'img/3_1f.png',
         order: 11
     },
     {
         name: '4',
         img: 'img/1_4.png',
         imgFront: 'img/3_4f.png',
+        imgEnd: 'img/3_1f.png',
         order: 12
     },
     {
         name: '5',
         img: 'img/2_1.png',
         imgFront: 'img/4_1f.png',
+        imgEnd: 'img/3_1f.png',
         order: 13
     },
     {
         name: '6',
         img: 'img/2_2.png',
         imgFront: 'img/4_2f.png',
+        imgEnd: 'img/3_1f.png',
         order: 14
     },
     {
         name: '7',
         img: 'img/2_3.png',
         imgFront: 'img/4_3f.png',
+        imgEnd: 'img/3_1f.png',
         order: 15
     },
     {
         name: '8',
         img: 'img/2_4.png',
         imgFront: 'img/4_4f.png',
+        imgEnd: 'img/3_1f.png',
         order: 16
     }
 ]
@@ -150,14 +163,8 @@ function checkMatch() {
     //console.log(cards);
     //console.log('checkMatch');
 
-    //if same card
-    if (optionOneId === optionTwoId) {
-        cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
-        cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
-        //alert('clicked same img');
-    }
-
     if (cardsChosen[0] === cardsChosen[1] && optionOneId != optionTwoId) {
+        correctSound.play();
         cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); // //flip back to front img
         cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //flip back to front img
         cards[optionOneId].removeEventListener('click', flipCard);
@@ -174,8 +181,25 @@ function checkMatch() {
 		//TODO: make visible that cards are used. Maybe smarter to do it via id CSS
         cardsFound.push(cardsChosen);
         //alert('match found'); 
+
+        for(let i = 0; i < cards.length; i++) {
+            if (!cards[i].classList.contains('found')){
+            cards[i].addEventListener('click', flipCard);
+                }
+            }
+        }
+
+    //if same card
+    if (optionOneId === optionTwoId) {
+        wrongSound.play();
+        cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
+        cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
+        //alert('clicked same img');
     }
-    else { // if not the same card nor a match
+
+
+    else if(cardsChosen[0] != cardsChosen[1]){ // if not the same card nor a match
+        wrongSound.play();
         cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
         cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
         //alert('nope');
@@ -183,6 +207,12 @@ function checkMatch() {
     //resultDisplay.textContent = cardsFound.length;
     cardsChosen = []; //reset the array
     cardsChosenIds = [];
+
+    for(let i = 0; i < cards.length; i++) {
+    if (!cards[i].classList.contains('found')){
+    cards[i].addEventListener('click', flipCard);
+        }
+    }
 
     if(cardsFound.length === cardArray.length / 2) {
         //resultDisplay.textContent = 'Congratulations';
@@ -193,7 +223,53 @@ function checkMatch() {
         gridDisplay.classList.add('grid-end');
         headerDisplay.classList.add('hide-header');
         }
+        //setTimeout(doEndImg, 3000);
     }
+}
+
+async function doEndImg(){
+    const cards = document.querySelectorAll('#grid img'); //all img in the div with the id of grid
+    for (i=0; i <= 8; i++){
+        switch(i) {
+            case 1:
+            cards[9].setAttribute('src', cardArray[9].imgEnd);
+            await sleep(2000);
+            console.log('hi');
+            break;
+            case 2:
+            cards[10].setAttribute('src', cardArray[10].imgEnd);
+            await sleep(2000);
+            break;
+            case 3:
+            cards[11].setAttribute('src', cardArray[11].imgEnd);
+            await sleep(2000);
+            break;
+            case 4:
+            cardArray[12].setAttribute('src', cardArray[12].imgEnd);
+            await sleep(2000);
+            break;
+            case 5:
+            cardArray[13].setAttribute('src', cardArray[13].imgEnd);
+            await sleep(2000);
+            break;
+            case 6:
+            cardArray[14].setAttribute('src', cardArray[14].imgEnd);
+            await sleep(2000);
+            break;
+            case 7:
+            cardArray[15].setAttribute('src', cardArray[15].imgEnd);
+            await sleep(2000);
+            break;
+            case 8:
+            cardArray[16].setAttribute('src', cardArray[16].imgEnd);
+            await sleep(2000);
+            break;
+        }
+    }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /*flipping cards. 
@@ -212,14 +288,26 @@ function flipCard() {
     //console.log(cardsChosen); 
    this.setAttribute('src', cardArray[cardId].img); //assign a new image according to the object clicked on.
     if(cardsChosen.length === 2) {
+        const cards = document.querySelectorAll('#grid img');
+        for(let i = 0; i < cards.length; i++) {
+            cards[i].removeEventListener('click', flipCard);
+        }
         setTimeout(checkMatch, 500); //wait 500ms before executing the function
     }
 }
 
 //animating the grid
 function fadeIn(){
+  const h1 = document.getElementById('typewriter');
+  h1.remove();
+
   gridDisplay.classList.add('show');
-  gridDisplay.classList.remove('hide');  
+  gridDisplay.classList.remove('hide'); 
+}
+
+//play backsound
+function playBk() {
+    bkSound.play();
 }
 
   new TypeWriter(`#typewriter`, {
@@ -232,22 +320,52 @@ function fadeIn(){
     },
     timeout: 50
   })
-  .write(`Alles Gute zum Geburtstag!`)
-  .wait(2000)
+  .write(`Liebe Mama,`)
+  .wait(1000)
   .removeAll()
   .wait(500)
-  .write(`...ob das wohl mit dem Gedächtnis noch klappt?`)
-  .wait(2000)
+  .write(`älter werden ist nicht einfach:`)
+  .wait(1000)
   .removeAll()
   .wait(500)
-  .write(`...finden wir es heraus!`)
-  .wait(2000)
+  .write(`der Rücken schmerzt,`)
+  .wait(1000)
   .removeAll()
   .wait(500)
-  .write(`...mit einer Runde Memory!`)
+  .write(`man sieht wie ein Maulwurf,`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+  .write(`und klappt das mit dem Gedächtnis eigentlich noch?`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+  .write(`Was war das für ein Baum, der in Überruhr den Balkon überragte?`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+    .write(`(Genau, ein Holunderbaum.)`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+  .write(`Und wo war man nochmal im Urlaub, 2005?`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+  .write(`(Ja, wo eigentlich?)`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+  .write(`Stellen wir Dein Gedächtnis mal auf die Probe...`)
+  .wait(1000)
+  .removeAll()
+  .wait(500)
+  .write(`Mit einer Runde Memory!`)
+  .wait(3000)
+  .removeAll()
   .start()
 
-  //setTimeout(createBoard, 25000);
+  //setTimeout(createBoard, 1000);
   createBoard();
-  setTimeout(fadeIn, 2000); //22000
-  
+  setTimeout(fadeIn, 4000); //64000
+  //setTimeout(playBk, 5000);

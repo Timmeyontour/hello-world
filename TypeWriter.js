@@ -9,6 +9,7 @@
  * 
  * You're free to use this library as long as you keep this statement in this file
  */
+
 var __typewriter_cuid = 0;
 class TypeWriter{
     constructor(object, options){
@@ -19,7 +20,7 @@ class TypeWriter{
         if(!this.element) return console.error(`The element does not exists!`);
         this.save = [];
         this.options = options || {};
-        this.timeout = this.options.timeout || 100;
+        this.timeout = this.options.timeout || 50;
         const defaultcursor = {
           speed: 1000,
           size: 'larger',
@@ -41,6 +42,7 @@ class TypeWriter{
     write(value){
         if(typeof value !== 'string') return console.error(`Invalid value! Value must be a string.`)
         this.save.push({wait: null, value: value, remove: null, writing: true});
+        
         return this;
     }
     removeAll(){
@@ -84,6 +86,7 @@ class TypeWriter{
                           val = val + obj.value.charAt(objlength.length);
                           objlength += obj.value.charAt(objlength.length);
                           text.innerHTML = val;
+  
                       }
                     } else {
                       text.innerHTML += obj.value;
@@ -130,3 +133,9 @@ class TypeWriter{
         });
     }
 }
+/*
+function randomAudio() {
+    const sounds = document.querySelectorAll('audio');
+    sounds[0].play();
+}
+*/

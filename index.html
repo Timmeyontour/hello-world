@@ -9,14 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;500&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <audio id="backgroundsound">
+    <source src="/sfx/bk_sound.mp3" type="audio/mp3">
+    <source src="/sfx/bk_sound.wav" type="audio/wav">
+    Your browser does not support the audio tag.
+    </audio> 
+
+    <audio id="correct">
+    <source src="/sfx/correct.wav" type="audio/wav">
+    Your browser does not support the audio tag.
+    </audio> 
+    <audio id="wrong">
+    <source src="/sfx/wrong.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+    </audio> 
 </head>
 <body>
 <header>
     <h1 id="typewriter"><span id="memory" class="hide">Memory</span></h1>
+
+
 </header>
 <main>
     <!--<h3>Matches found: <span id="result"></span></h3>-->
-
     <div id="grid" class="hide"></div>
 </main>
    <script src="TypeWriter.js"></script>
