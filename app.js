@@ -195,6 +195,8 @@ function checkMatch() {
         cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
         cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
         //alert('clicked same img');
+        cards[optionOneId].classList.remove('found');
+        cards[optionTwoId].classList.remove('found');
     }
 
 
@@ -203,6 +205,8 @@ function checkMatch() {
         cards[optionOneId].setAttribute('src', cardArray[optionOneId].imgFront); //back to front img
         cards[optionTwoId].setAttribute('src', cardArray[optionTwoId].imgFront); //back to front img
         //alert('nope');
+        cards[optionOneId].classList.remove('found');
+        cards[optionTwoId].classList.remove('found');
     }
     //resultDisplay.textContent = cardsFound.length;
     cardsChosen = []; //reset the array
@@ -287,6 +291,7 @@ function flipCard() {
     cardsOrder.push(cardArray[cardId].order); // NEW: push order onto array
     //console.log(cardsChosen); 
    this.setAttribute('src', cardArray[cardId].img); //assign a new image according to the object clicked on.
+   this.classList.add('found');
     if(cardsChosen.length === 2) {
         const cards = document.querySelectorAll('#grid img');
         for(let i = 0; i < cards.length; i++) {
@@ -368,4 +373,4 @@ function playBk() {
   //setTimeout(createBoard, 1000);
   createBoard();
   setTimeout(fadeIn, 4000); //64000
-  //setTimeout(playBk, 5000);
+  setTimeout(playBk, 5000);
