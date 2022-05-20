@@ -369,5 +369,5 @@ function playBk() {
 
   //setTimeout(createBoard, 1000);
   createBoard();
-  setTimeout(fadeIn, 4000); //64000
+  setTimeout(fadeIn, 64000); //64000
   setTimeout(playBk, 5000);
