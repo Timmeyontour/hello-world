@@ -12,6 +12,9 @@ let testVar = false;
 let memory = document.querySelector('#memory');
 let counter = 0;
 
+let beginTime = 1000;
+let endTime = 2000;
+
 let bkSound = document.querySelector('#backgroundsound');
 let correctSound = document.querySelector('#correct');
 let wrongSound = document.querySelector('#wrong');
@@ -22,103 +25,111 @@ const cardArray = [
         name: '1',
         img: 'img/1_1.png',
         imgFront: 'img/1_1f.png',
+        imgEnd: 'img/1_1f.png',
         order: 1
     },
     {
         name: '2',
         img: 'img/1_2.png',
         imgFront: 'img/1_2f.png',
+        imgEnd: 'img/1_2f.png',
         order: 2
     },
     {
         name: '3',
         img: 'img/1_3.png',
         imgFront: 'img/1_3f.png',
+        imgEnd: 'img/1_3f.png',
         order: 3
     },
     {
         name: '4',
         img: 'img/1_4.png',
         imgFront: 'img/1_4f.png',
+        imgEnd: 'img/1_4f.png',
         order: 4
     },
     {
         name: '5',
         img: 'img/2_1.png',
         imgFront: 'img/2_1f.png',
+        imgEnd: 'img/2_1f.png',
         order: 5
     },
     {
         name: '6',
         img: 'img/2_2.png',
         imgFront: 'img/2_2f.png',
+        imgEnd: 'img/2_2f.png',
         order: 6
     },
     {
         name: '7',
         img: 'img/2_3.png',
         imgFront: 'img/2_3f.png',
+        imgEnd: 'img/2_3f.png',
         order: 7
     },
     {
         name: '8',
         img: 'img/2_4.png',
         imgFront: 'img/2_4f.png',
+        imgEnd: 'img/2_4f.png',
         order: 8
     },
     {   name: '1',
         img: 'img/1_1.png',
         imgFront: 'img/3_1f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/3_1e.png',
         order: 9
     },
     {
         name: '2',
         img: 'img/1_2.png',
         imgFront: 'img/3_2f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/3_2e.png',
         order: 10
     },
     {
         name: '3',
         img: 'img/1_3.png',
         imgFront: 'img/3_3f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/3_3e.png',
         order: 11
     },
     {
         name: '4',
         img: 'img/1_4.png',
         imgFront: 'img/3_4f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/3_4e.png',
         order: 12
     },
     {
         name: '5',
         img: 'img/2_1.png',
         imgFront: 'img/4_1f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/4_1e.png',
         order: 13
     },
     {
         name: '6',
         img: 'img/2_2.png',
         imgFront: 'img/4_2f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/4_2e.png',
         order: 14
     },
     {
         name: '7',
         img: 'img/2_3.png',
         imgFront: 'img/4_3f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/4_3e.png',
         order: 15
     },
     {
         name: '8',
         img: 'img/2_4.png',
         imgFront: 'img/4_4f.png',
-        imgEnd: 'img/3_1f.png',
+        imgEnd: 'img/4_4e.png',
         order: 16
     }
 ]
@@ -220,55 +231,41 @@ function checkMatch() {
 
     if(cardsFound.length === cardArray.length / 2) {
         //resultDisplay.textContent = 'Congratulations';
-        for(let i = 0; i < cards.length; i++){
+
+        setTimeout(doEndImg, 3000);
+        setTimeout(noBorderEnd, 22000);
+    }
+}
+
+function noBorderEnd() {
+    const cards = document.querySelectorAll('#grid img');
+    for(let i = 0; i < cards.length; i++){
         const card = cards[i];
         card.classList.remove('grid-item');
         card.classList.add('grid-done');
         gridDisplay.classList.add('grid-end');
         headerDisplay.classList.add('hide-header');
         }
-        //setTimeout(doEndImg, 3000);
-    }
 }
 
-async function doEndImg(){
+function doEndImg(){
+
     const cards = document.querySelectorAll('#grid img'); //all img in the div with the id of grid
-    for (i=0; i <= 8; i++){
-        switch(i) {
-            case 1:
-            cards[9].setAttribute('src', cardArray[9].imgEnd);
-            await sleep(2000);
-            console.log('hi');
-            break;
-            case 2:
-            cards[10].setAttribute('src', cardArray[10].imgEnd);
-            await sleep(2000);
-            break;
-            case 3:
-            cards[11].setAttribute('src', cardArray[11].imgEnd);
-            await sleep(2000);
-            break;
-            case 4:
-            cardArray[12].setAttribute('src', cardArray[12].imgEnd);
-            await sleep(2000);
-            break;
-            case 5:
-            cardArray[13].setAttribute('src', cardArray[13].imgEnd);
-            await sleep(2000);
-            break;
-            case 6:
-            cardArray[14].setAttribute('src', cardArray[14].imgEnd);
-            await sleep(2000);
-            break;
-            case 7:
-            cardArray[15].setAttribute('src', cardArray[15].imgEnd);
-            await sleep(2000);
-            break;
-            case 8:
-            cardArray[16].setAttribute('src', cardArray[16].imgEnd);
-            await sleep(2000);
-            break;
-        }
+    for(i=0; i < cards.length; i++) {
+        let currentCard = cards[i];
+        let countImg = i;
+        beginTime += 1000;
+        endTime += 1000;
+
+        setTimeout(() => {
+                currentCard.classList.add('transitioning-src'); // Add class to begin transition
+
+        }, beginTime); 
+
+        setTimeout(() => {
+                currentCard.classList.remove('transitioning-src');
+                currentCard.setAttribute('src', cardArray[countImg].imgEnd); //back to end img
+        }, endTime); // Ensure timeout matches transition time, remove transition class
     }
 }
 

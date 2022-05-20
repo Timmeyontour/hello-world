@@ -95,6 +95,29 @@ span {
 img {
     cursor:pointer;
     filter:grayscale(1);
+    animation: fadeIn 1s ease-in;
+}
+
+.transitioning-src {
+    animation: fadeOut 1s ease-out;
+}
+
+@keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+}
+
+@keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
 }
 
 .found {
