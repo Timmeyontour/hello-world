@@ -25,56 +25,56 @@ const cardArray = [
         name: '1',
         img: 'img/1_1.png',
         imgFront: 'img/1_1f.png',
-        imgEnd: 'img/1_1f.png',
+        imgEnd: 'img/1_1e.png',
         order: 1
     },
     {
         name: '2',
         img: 'img/1_2.png',
         imgFront: 'img/1_2f.png',
-        imgEnd: 'img/1_2f.png',
+        imgEnd: 'img/1_2e.png',
         order: 2
     },
     {
         name: '3',
         img: 'img/1_3.png',
         imgFront: 'img/1_3f.png',
-        imgEnd: 'img/1_3f.png',
+        imgEnd: 'img/1_3e.png',
         order: 3
     },
     {
         name: '4',
         img: 'img/1_4.png',
         imgFront: 'img/1_4f.png',
-        imgEnd: 'img/1_4f.png',
+        imgEnd: 'img/1_4e.png',
         order: 4
     },
     {
         name: '5',
         img: 'img/2_1.png',
         imgFront: 'img/2_1f.png',
-        imgEnd: 'img/2_1f.png',
+        imgEnd: 'img/2_1e.png',
         order: 5
     },
     {
         name: '6',
         img: 'img/2_2.png',
         imgFront: 'img/2_2f.png',
-        imgEnd: 'img/2_2f.png',
+        imgEnd: 'img/2_2e.png',
         order: 6
     },
     {
         name: '7',
         img: 'img/2_3.png',
         imgFront: 'img/2_3f.png',
-        imgEnd: 'img/2_3f.png',
+        imgEnd: 'img/2_3e.png',
         order: 7
     },
     {
         name: '8',
         img: 'img/2_4.png',
         imgFront: 'img/2_4f.png',
-        imgEnd: 'img/2_4f.png',
+        imgEnd: 'img/2_4e.png',
         order: 8
     },
     {   name: '1',
